@@ -10,9 +10,10 @@ typedef struct _binaryTreeNode
 
 } b_node;
 
-void func1();
+b_node* insert_bnode( int value, b_node* root );
 
-void func2();
-
+void print_inorder( b_node* root );
+void print_preorder( b_node* root );
+void print_postorder( b_node* root );
 
 #endif
