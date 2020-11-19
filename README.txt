@@ -4,4 +4,6 @@ Eva's Red Black Tree library
 
 USAGE INSTRUCTIONS:
 
-good luck have fun <3
+simply compile with 'make'
+
+run the executable 'Final.out' for an example
