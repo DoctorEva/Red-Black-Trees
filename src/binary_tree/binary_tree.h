@@ -13,6 +13,7 @@ typedef struct _binaryTreeNode
 b_node* insert_bnode( int value, b_node* root );
 
 // traversals.c
+// NOTE: these are only the depth first traversals
 void print_inorder( b_node* root );
 void print_preorder( b_node* root );
 void print_postorder( b_node* root );
