@@ -1,4 +1,7 @@
-all: insert_bnode.o
+all: insert_bnode.o tree_depth.o
 
-binary_tree.o: insert_bnode.c
+insert_bnode.o: insert_bnode.c
 	gcc -c insert_bnode.c
+
+tree_depth.o: tree_depth.c
+	gcc -c tree_depth.c

@@ -18,19 +18,16 @@ b_node* insert_bnode( int value, b_node* root )
   while( 1 )
   {
     int go_left = ( value < cur_node->value );
-
     b_node* next_node = go_left ? cur_node->left : cur_node->right;
 
     if( !next_node )
     {
+      printf("Inserted %d on the %s of node %d\n", value, go_left ? "left":"right", cur_node->value);
+      
       if ( go_left ) cur_node->left = new_node;
       else           cur_node->right = new_node;
-
-      printf("Inserted %d on the %s of node %d\n",
-        value, go_left ? "left":"right", cur_node->value);
       return root;
     }
-
     cur_node = next_node;
   }
 

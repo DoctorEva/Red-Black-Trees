@@ -16,4 +16,6 @@ void print_inorder( b_node* root );
 void print_preorder( b_node* root );
 void print_postorder( b_node* root );
 
+int tree_depth( b_node* root );
+
 #endif

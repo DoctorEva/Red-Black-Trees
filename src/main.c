@@ -14,10 +14,12 @@ int main( int argc, char** argv )
   puts("MAIN > To demonstrate our binary tree, we are going to repeatedly insert randomly generated numbers into two trees.");
   puts("MAIN > One of these trees will be balanced as a red-black tree. The other will stay a simple binary tree.");
 
-  for(int x = 0; x < 100; x++)
+  for(int x = 0; x < 42069; x++)
   {
     b_root = insert_bnode( random_int( -1000, 1000 ), b_root );
   }
+
+  printf("Depth of regular binary tree: %d\n", tree_depth( b_root ));
 
 
   return 0;
