@@ -22,8 +22,8 @@ b_node* insert_bnode( int value, b_node* root )
 
     if( !next_node )
     {
-      printf("Inserted %d on the %s of node %d\n", value, go_left ? "left":"right", cur_node->value);
-      
+      // printf("Inserted %d on the %s of node %d\n", value, go_left ? "left":"right", cur_node->value);
+
       if ( go_left ) cur_node->left = new_node;
       else           cur_node->right = new_node;
       return root;
