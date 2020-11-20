@@ -1,4 +1,4 @@
-all: insert_bnode.o tree_depth.o traversals.o
+all: insert_bnode.o tree_depth.o traversals.o search_bnode.o
 
 insert_bnode.o: insert_bnode.c
 	gcc -c insert_bnode.c

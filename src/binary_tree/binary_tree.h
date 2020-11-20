@@ -11,6 +11,7 @@ typedef struct _binaryTreeNode
 } b_node;
 
 b_node* insert_bnode( int value, b_node* root );
+b_node* _insert_bnode( int value, b_node* root, b_node** ret_loc );
 
 // traversals.c
 // NOTE: these are only the depth first traversals

@@ -5,11 +5,13 @@
 
 b_node* initialize_bnode( int value );
 
-b_node* insert_bnode( int value, b_node* root )
+b_node* _insert_bnode( int value, b_node* root, b_node** ret_loc )
 {
   // If the root was null, create a new node and return.
   b_node* new_node = initialize_bnode( value );
-  if( !root )
+  if ( ret_loc )
+    *ret_loc = new_node;
+  if ( !root )
     return new_node;
 
   // If there was a root, traverse the tree and insert a new one.
@@ -33,6 +35,10 @@ b_node* insert_bnode( int value, b_node* root )
 
 }
 
+b_node* insert_bnode( int value, b_node* root )
+{
+  return _insert_bnode( value, root, NULL );
+}
 //_____________________________________________________________
 
 b_node* initialize_bnode( int value )
