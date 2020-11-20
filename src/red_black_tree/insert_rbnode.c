@@ -6,7 +6,16 @@
 
 Data_node* program_rbnodes = NULL;
 
-b_node* locate_parent( b_node* target, b_node* root );
+typedef struct _node_family
+{
+  b_node* self;
+  b_node* parent;
+  b_node* grandfather;
+  b_node* sibling;
+  b_node* uncle;
+} node_family;
+
+rb_node* lookup_rbnode( b_node* target );
 
 rb_node* insert_rbnode( int value, rb_node* root)
 {
@@ -31,18 +40,35 @@ rb_node* insert_rbnode( int value, rb_node* root)
 
 //______________________________________________________
 
-b_node* locate_parent( b_node* target, b_node* root )
+rb_node* lookup_rbnode( b_node* target )
 {
-  if( !root )
-    return NULL;
+  Data_node* list = list_front( program_rbnodes );
+  rb_node* cur_node = (rb_node*) list->value_ptr;
 
-  int leftmatch = ( target == root->left );
-  int rightmatch = ( target == root->right );
-  if ( leftmatch || rightmatch )
-    return root;
+  while ( list && !(cur_node->node == target) )
+  {
+    list = list->next;
+    cur_node = (rb_node*) list->value_ptr;
+  }
 
-  b_node* leftSearch = locate_parent( target, root->left );
-  b_node* rightSearch = locate_parent( target, root->right );
+  return cur_node;
+}
 
-  return ( leftSearch ) ? leftSearch : rightSearch;
+void balance_tree( b_node* node, b_node* root )
+{
+
+}
+
+node_family identify_family( b_node* node, b_node* root )
+{
+  node_family fam;
+  fam.self = node;
+
+  fam.parent      = locate_parent( fam.self, root );
+  fam.grandfather = locate_parent( fam.parent, root );
+
+  fam.sibling = locate_sibling( fam.self, root );
+  fam.uncle   = locate_sibling( fam.parent, root );
+
+  return fam;
 }

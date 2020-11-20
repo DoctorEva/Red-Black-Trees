@@ -21,4 +21,7 @@ void print_postorder( b_node* root );
 
 int tree_depth( b_node* root );
 
+b_node* locate_parent( b_node* target, b_node* root );
+b_node* locate_sibling( b_node* target, b_node* root );
+
 #endif
