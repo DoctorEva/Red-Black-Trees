@@ -24,5 +24,6 @@ void tree_trace( b_node* root );
 
 b_node* locate_parent( b_node* target, b_node* root );
 b_node* locate_sibling( b_node* target, b_node* root );
+b_node* locate_root( b_node* target );
 
 #endif

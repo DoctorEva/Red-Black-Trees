@@ -3,24 +3,28 @@
 
 #include "balance_tree.h"
 
+#define GP  grandparent
+#define GGP greatgrandparent
+
 void rbnode_colorSwap( rb_node* a, rb_node* b );
 node_family family_swap_parent_and_X( node_family f );
-void handle_subrootChange( rb_node* ancestor, rb_node* decendent, rb_node* newDecendent );
 
 void LL_rotate( node_family f )
 {
+  b_node* gp = (f.GP) ? f.GP->node : NULL;
+  b_node* ggp = (f.GGP) ? f.GGP->node : NULL;
   // right rotate the grandparent
-  right_rotate( f.grandparent->node );
-  handle_subrootChange( f.greatgrandparent, f.grandparent, f.parent );
+  right_rotate( gp, ggp );
 
-  // swap the colors.
-  rbnode_colorSwap( f.grandparent, f.parent );
+  // swap the colors of grandpa and parent.
+  rbnode_colorSwap( f.GP, f.parent );
 }
 
 void LR_rotate( node_family f )
 {
-  left_rotate( f.parent->node );
-  handle_subrootChange( f.grandparent, f.parent, f.self );
+  b_node* p = (f.parent) ? f.parent->node : NULL;
+  b_node* gp = (f.GP) ? f.GP->node : NULL;
+  left_rotate( p, gp );
 
   f = family_swap_parent_and_X( f );
   LL_rotate( f );
@@ -28,17 +32,18 @@ void LR_rotate( node_family f )
 
 void RR_rotate( node_family f )
 {
-  left_rotate( f.grandparent->node );
-  handle_subrootChange( f.greatgrandparent, f.grandparent, f.parent );
+  b_node* gp = (f.GP) ? f.GP->node : NULL;
+  b_node* ggp = (f.GGP) ? f.GGP->node : NULL;
+  left_rotate( gp, ggp );
 
-  rbnode_colorSwap( f.grandparent, f.parent );
+  rbnode_colorSwap( f.GP, f.parent );
 }
 
 void RL_rotate( node_family f )
 {
-  // right rotate the parent
-  right_rotate( f.parent->node );
-  handle_subrootChange( f.grandparent, f.parent, f.self );
+  b_node* p = (f.parent) ? f.parent->node : NULL;
+  b_node* gp = (f.GP) ? f.GP->node : NULL;
+  right_rotate( p, gp );
 
   f = family_swap_parent_and_X( f );
   RR_rotate( f );
@@ -65,16 +70,4 @@ node_family family_swap_parent_and_X( node_family f )
   f.self = f.parent;
   f.parent = temp;
   return f;
-}
-
-void handle_subrootChange( rb_node* ancestor, rb_node* decendent, rb_node* newDecendent )
-{
-  if ( !ancestor ) return;
-
-  side s = getSide( decendent->node, ancestor->node );
-  if ( s == LEFT )
-    ancestor->node->left  = newDecendent->node;
-  else
-    ancestor->node->right = newDecendent->node;
-
 }

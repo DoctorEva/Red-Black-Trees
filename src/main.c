@@ -32,9 +32,6 @@ int main( int argc, char** argv )
   puts( "\n=== RED BLACK TREE DUMP ===");
   dump_tree( rb_root->node );
 
-  puts( "\nLets insert a new node '0' and trace where it ended up!");
-  //trace_path_example( b_root );
-
   puts( "\nTree trace on binary tree" );
   tree_trace( b_root );
 

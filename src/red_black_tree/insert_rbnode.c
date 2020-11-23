@@ -27,11 +27,12 @@ rb_node* _insert_rbnode( int value, rb_node* root, b_node** ret_loc )
   rb_node* rb_root = ( root ) ? root : rbn;
 
   // Rebalance the tree
-  balance_tree( rbn->node, rb_root->node, rbnode_list );
+  rb_root = balance_tree( rbn->node, rb_root, rbnode_list );
 
   // always return the rb_node that stores the root b_node
   if ( ret_loc )
     *ret_loc = rbn->node;
 
+  printf( "Current root is %p\n", rb_root );
   return rb_root;
 }

@@ -4,7 +4,8 @@ all: \
 	traversals.o \
 	locate_parent.o \
 	locate_sibling.o \
-	tree_trace.o
+	tree_trace.o \
+	locate_root.o
 
 insert_bnode.o: insert_bnode.c
 	gcc -c insert_bnode.c
