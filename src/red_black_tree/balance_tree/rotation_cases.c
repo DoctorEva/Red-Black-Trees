@@ -71,7 +71,7 @@ void handle_subrootChange( rb_node* ancestor, rb_node* decendent, rb_node* newDe
 {
   if ( !ancestor ) return;
 
-  side s = getSide( ancestor->node, decendent->node );
+  side s = getSide( decendent->node, ancestor->node );
   if ( s == LEFT )
     ancestor->node->left  = newDecendent->node;
   else

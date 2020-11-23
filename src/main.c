@@ -9,7 +9,6 @@
 #include "random_int.h"
 
 void dump_tree( b_node* b_root );
-void tree_trace( b_node* root, int depth );
 void trace_path_example( b_node* b_root );
 
 int main( int argc, char** argv )
@@ -37,11 +36,10 @@ int main( int argc, char** argv )
   //trace_path_example( b_root );
 
   puts( "\nTree trace on binary tree" );
-  tree_trace( b_root, 0 );
+  tree_trace( b_root );
 
   puts( "\nTree trace on red black tree" );
-  tree_trace( rb_root->node, 0 );
-
+  tree_trace( rb_root->node );
 
   return 0;
 }
@@ -63,24 +61,6 @@ void dump_tree( b_node* b_root )
   puts( "\n\nPostorder traversal" );
   print_postorder( b_root );
   puts("");
-}
-
-void tree_trace( b_node* root, int depth )
-{
-  if ( !root ) return;
-
-  int self = root->value;
-  char left_txt[10], right_txt[10];
-
-  if ( root->left ) sprintf( left_txt, "%d", root->left->value );
-  else              strcpy( left_txt, "<nil>" );
-
-  if ( root->right ) sprintf( right_txt, "%d", root->right->value );
-  else               strcpy( right_txt, "<nil>" );
-
-  printf( "lv%d node:%d | l:%s \tr:%s\n", depth, self, left_txt, right_txt );
-  tree_trace( root->left, depth+1 );
-  tree_trace( root->right, depth+1 );
 }
 
 void trace_path_example( b_node* b_root )

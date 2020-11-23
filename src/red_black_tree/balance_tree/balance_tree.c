@@ -5,7 +5,13 @@
 
 side getSide( b_node* node, b_node* parent )
 {
-  return ( parent->left == node ) ? LEFT : RIGHT;
+  if      ( parent->left == node ) return LEFT;
+  else if ( parent->right == node ) return RIGHT;
+  else
+  {
+    puts( "balance_tree.c: Error, not a child of parent." );
+    exit(1);
+  }
 }
 
 void balance_tree( b_node* node, b_node* root, Data_node* rbnode_list )
@@ -40,9 +46,9 @@ void balance_tree( b_node* node, b_node* root, Data_node* rbnode_list )
   // Uncle is black. Parent is red ( Note, this implies there MUST be a grandparent )
   side parent_side = getSide( f.parent->node, f.grandparent->node );
   side self_side   = getSide( f.self->node, f.parent->node );
-  // if      ( parent_side == LEFT && self_side == LEFT )   { LL_rotate(f); puts( "LL rotate" ); }
-  // else if ( parent_side == LEFT && self_side == RIGHT )  { LR_rotate(f); puts( "LR rotate" ); }
-  // else if ( parent_side == RIGHT && self_side == RIGHT ) { RR_rotate(f); puts( "RR rotate" ); }
-  // else if ( parent_side == RIGHT && self_side == LEFT )  { RL_rotate(f); puts( "RL rotate" ); }
+   //if      ( parent_side == LEFT && self_side == LEFT )   { LL_rotate(f); puts( "LL rotate" ); }
+   //else if ( parent_side == LEFT && self_side == RIGHT )  { LR_rotate(f); puts( "LR rotate" ); }
+   //else if ( parent_side == RIGHT && self_side == RIGHT ) { RR_rotate(f); puts( "RR rotate" ); }
+   //else if ( parent_side == RIGHT && self_side == LEFT )  { RL_rotate(f); puts( "RL rotate" ); }
 
 }
