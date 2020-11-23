@@ -9,6 +9,7 @@
 #include "random_int.h"
 
 void dump_tree( b_node* b_root );
+void tree_trace( b_node* root, int depth );
 void trace_path_example( b_node* b_root );
 
 int main( int argc, char** argv )
@@ -19,7 +20,7 @@ int main( int argc, char** argv )
   puts("MAIN > To demonstrate our binary tree, we are going to repeatedly insert randomly generated numbers into two trees.");
   puts("MAIN > One of these trees will be balanced as a red-black tree. The other will stay a simple binary tree.");
 
-  for(int x = 0; x < 100; x++)
+  for(int x = 0; x < 20; x++)
   {
     int r = random_int( -1000, 1000 );
     b_root  = insert_bnode( r , b_root );
@@ -33,7 +34,14 @@ int main( int argc, char** argv )
   dump_tree( rb_root->node );
 
   puts( "\nLets insert a new node '0' and trace where it ended up!");
-  trace_path_example( b_root );
+  //trace_path_example( b_root );
+
+  puts( "\nTree trace on binary tree" );
+  tree_trace( b_root, 0 );
+
+  puts( "\nTree trace on red black tree" );
+  tree_trace( rb_root->node, 0 );
+
 
   return 0;
 }
@@ -55,6 +63,24 @@ void dump_tree( b_node* b_root )
   puts( "\n\nPostorder traversal" );
   print_postorder( b_root );
   puts("");
+}
+
+void tree_trace( b_node* root, int depth )
+{
+  if ( !root ) return;
+
+  int self = root->value;
+  char left_txt[10], right_txt[10];
+
+  if ( root->left ) sprintf( left_txt, "%d", root->left->value );
+  else              strcpy( left_txt, "<nil>" );
+
+  if ( root->right ) sprintf( right_txt, "%d", root->right->value );
+  else               strcpy( right_txt, "<nil>" );
+
+  printf( "lv%d node:%d | l:%s \tr:%s\n", depth, self, left_txt, right_txt );
+  tree_trace( root->left, depth+1 );
+  tree_trace( root->right, depth+1 );
 }
 
 void trace_path_example( b_node* b_root )

@@ -15,6 +15,7 @@ void balance_tree( b_node* node, b_node* root, Data_node* rbnode_list )
   // Case 1: Black if x is root.
   if ( !f.parent )
   {
+    puts( "root colored to black." );
     // recolour to black.
     f.self->color = BLACK;
     return;
@@ -29,6 +30,7 @@ void balance_tree( b_node* node, b_node* root, Data_node* rbnode_list )
 
   if ( uncle_color == RED ) // Grandparent MUST be black.
   {
+    puts( "uncle is red, recoloring and recursing" );
     f.parent->color = BLACK;
     f.uncle->color = BLACK;
     f.grandparent->color = RED;
@@ -38,9 +40,9 @@ void balance_tree( b_node* node, b_node* root, Data_node* rbnode_list )
   // Uncle is black. Parent is red ( Note, this implies there MUST be a grandparent )
   side parent_side = getSide( f.parent->node, f.grandparent->node );
   side self_side   = getSide( f.self->node, f.parent->node );
-  // if      ( parent_side == LEFT && self_side == LEFT )   { LL_rotate(f); }
-  // else if ( parent_side == LEFT && self_side == RIGHT )  { LR_rotate(f); }
-  // else if ( parent_side == RIGHT && self_side == RIGHT ) { RR_rotate(f); }
-  // else if ( parent_side == RIGHT && self_side == LEFT )  { RL_rotate(f); }
+  // if      ( parent_side == LEFT && self_side == LEFT )   { LL_rotate(f); puts( "LL rotate" ); }
+  // else if ( parent_side == LEFT && self_side == RIGHT )  { LR_rotate(f); puts( "LR rotate" ); }
+  // else if ( parent_side == RIGHT && self_side == RIGHT ) { RR_rotate(f); puts( "RR rotate" ); }
+  // else if ( parent_side == RIGHT && self_side == LEFT )  { RL_rotate(f); puts( "RL rotate" ); }
 
 }

@@ -11,11 +11,15 @@ rb_node* lookup_rbnode( b_node* target, Data_node* rbnode_list )
   Data_node* list = list_front( rbnode_list );
   rb_node* cur_node = (rb_node*) list->value_ptr;
 
-  while ( list && !(cur_node->node == target) )
+  while ( list )
   {
-    list = list->next;
     cur_node = (rb_node*) list->value_ptr;
+    if ( cur_node->node == target )
+      return cur_node;
+
+    list = list->next;
   }
 
-  return cur_node;
+  // Node not found!
+  return NULL;
 }

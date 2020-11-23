@@ -14,6 +14,8 @@ typedef struct _redBlackTreeNode
 } rb_node;
 
 rb_node* insert_rbnode( int value, rb_node* root);
+rb_node* _insert_rbnode( int value, rb_node* root, b_node** ret_loc );
+
 rb_node* lookup_rbnode( b_node* target, Data_node* rbnode_list );
 
 
