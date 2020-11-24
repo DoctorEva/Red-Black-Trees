@@ -11,7 +11,7 @@ node_family family_swap_parent_and_X( node_family f );
 
 void LL_rotate( node_family f )
 {
-  b_node* gp = (f.GP) ? f.GP->node : NULL;
+  b_node* gp = f.GP->node;
   b_node* ggp = (f.GGP) ? f.GGP->node : NULL;
   // right rotate the grandparent
   right_rotate( gp, ggp );
@@ -22,7 +22,7 @@ void LL_rotate( node_family f )
 
 void LR_rotate( node_family f )
 {
-  b_node* p = (f.parent) ? f.parent->node : NULL;
+  b_node* p = f.parent->node;
   b_node* gp = (f.GP) ? f.GP->node : NULL;
   left_rotate( p, gp );
 
@@ -32,7 +32,7 @@ void LR_rotate( node_family f )
 
 void RR_rotate( node_family f )
 {
-  b_node* gp = (f.GP) ? f.GP->node : NULL;
+  b_node* gp = f.GP->node;
   b_node* ggp = (f.GGP) ? f.GGP->node : NULL;
   left_rotate( gp, ggp );
 
@@ -41,7 +41,7 @@ void RR_rotate( node_family f )
 
 void RL_rotate( node_family f )
 {
-  b_node* p = (f.parent) ? f.parent->node : NULL;
+  b_node* p = f.parent->node;
   b_node* gp = (f.GP) ? f.GP->node : NULL;
   right_rotate( p, gp );
 

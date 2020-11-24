@@ -9,7 +9,6 @@
 #include "random_int.h"
 
 void dump_tree( b_node* b_root );
-void trace_path_example( b_node* b_root );
 
 int main( int argc, char** argv )
 {
@@ -19,10 +18,10 @@ int main( int argc, char** argv )
   puts("MAIN > To demonstrate our binary tree, we are going to repeatedly insert randomly generated numbers into two trees.");
   puts("MAIN > One of these trees will be balanced as a red-black tree. The other will stay a simple binary tree.");
 
-  for(int x = 0; x < 20; x++)
+  for(int x = 0; x < 100; x++)
   {
     int r = random_int( -1000, 1000 );
-    b_root  = insert_bnode( r , b_root );
+    b_root  = insert_bnode( r, b_root );
     rb_root = insert_rbnode( r, rb_root );
   }
 
@@ -58,22 +57,4 @@ void dump_tree( b_node* b_root )
   puts( "\n\nPostorder traversal" );
   print_postorder( b_root );
   puts("");
-}
-
-void trace_path_example( b_node* b_root )
-{
-  b_node* new;
-  _insert_bnode( 0, b_root, &new );
-  b_node* parent = locate_parent( new, b_root );
-  b_node* sibling = locate_sibling( new, b_root );
-  while( parent )
-  {
-    char sibling_txt[10];
-    if ( sibling ) sprintf( sibling_txt, "%d", sibling->value );
-    else           strcpy( sibling_txt, "<nil>" );
-    printf("%d\tparent: %d\tsibling: %s\n", new->value, parent->value, sibling_txt);
-    new = parent;
-    parent = locate_parent( new, b_root );
-    sibling = locate_sibling( new, b_root );
-  }
 }

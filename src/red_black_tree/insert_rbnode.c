@@ -33,6 +33,5 @@ rb_node* _insert_rbnode( int value, rb_node* root, b_node** ret_loc )
   if ( ret_loc )
     *ret_loc = rbn->node;
 
-  printf( "Current root is %p\n", rb_root );
   return rb_root;
 }

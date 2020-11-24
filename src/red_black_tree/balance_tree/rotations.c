@@ -18,13 +18,13 @@ void right_rotate( b_node* pivot, b_node* pivot_parent )
   }
 
   // right rotate
-  b_node* pr = p->right;
-  b_node* pc_l = p_child->left;
-  b_node* pc_r = p_child->right;
-  p_child->left = pc_r;
+  //b_node* pr = p->right;          // alpha
+  //b_node* pc_l = p_child->left;   // lambda
+  b_node* pc_r = p_child->right;  // beta
+  //p_child->left = pc_l;
   p_child->right = p;
-  p->left = pc_l;
-  p->right = pr;
+  p->left = pc_r;
+  //p->right = pr;
 
   // Reattach pivot parent.
   reattach_pivot( p, pivot_parent, p_child );
@@ -43,13 +43,13 @@ void left_rotate( b_node* pivot, b_node* pivot_parent )
   }
 
   // left rotate
-  b_node* pl = p->left;
-  b_node* pc_l = p_child->left;
-  b_node* pc_r = p_child->right;
-  p_child->left = pc_r;
-  p_child->right = p;
-  p->left = pc_l;
-  p->right = pc_r;
+  //b_node* pl = p->left;           // alpha
+  b_node* pc_l = p_child->left;   // beta
+  //b_node* pc_r = p_child->right;  // lambda
+  p_child->left = p;
+  // p_child->right = pc_r;
+  // p->left = pl;
+  p->right = pc_l;
 
   // Reattach pivot parent.
   reattach_pivot( p, pivot_parent, p_child );

@@ -19,7 +19,7 @@ node_family identify_family( b_node* node, b_node* root, Data_node* rbnode_list 
   fam.grandparent      = lookup_rbnode( grandparent, rbnode_list );
   fam.greatgrandparent = lookup_rbnode( greatgrandparent, rbnode_list );
   fam.uncle            = lookup_rbnode( uncle,       rbnode_list );
-  dump_family( fam );
+  //dump_family( fam );
   return fam;
 }
 
