@@ -8,6 +8,8 @@ typedef struct _binaryTreeNode
   struct _binaryTreeNode* left;
   struct _binaryTreeNode* right;
 
+  struct _binaryTreeNode* parent;
+
 } b_node;
 
 b_node* insert_bnode( int value, b_node* root );
@@ -22,8 +24,8 @@ void print_postorder( b_node* root );
 int tree_depth( b_node* root );
 void tree_trace( b_node* root );
 
-b_node* locate_parent( b_node* target, b_node* root );
-b_node* locate_sibling( b_node* target, b_node* root );
+b_node* locate_parent( b_node* target );
+b_node* locate_sibling( b_node* target );
 b_node* locate_root( b_node* target );
 
 #endif

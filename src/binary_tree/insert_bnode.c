@@ -25,7 +25,7 @@ b_node* _insert_bnode( int value, b_node* root, b_node** ret_loc )
     if( !next_node )
     {
       // printf("Inserted %d on the %s of node %d\n", value, go_left ? "left":"right", cur_node->value);
-
+      new_node->parent = cur_node;
       if ( go_left ) cur_node->left = new_node;
       else           cur_node->right = new_node;
       return root;
@@ -47,6 +47,7 @@ b_node* initialize_bnode( int value )
   node->value = value;
   node->left  = NULL;
   node->right = NULL;
+  node->parent = NULL;
 
   return node;
 }

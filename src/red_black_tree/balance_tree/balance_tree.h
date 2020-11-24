@@ -17,12 +17,12 @@ typedef struct _node_family
 rb_node* balance_tree( b_node* node, rb_node* rbroot, Data_node* rbnode_list );
 
 // Balance tree helpers.
-node_family identify_family( b_node* node, b_node* root, Data_node* rbnode_list );
-side getSide( b_node* node, b_node* parent );
+node_family identify_family( b_node* node, Data_node* rbnode_list );
+side getSide( b_node* node );
 
 // rotations.c
-void right_rotate( b_node* pivot, b_node* pivot_parent );
-void left_rotate( b_node* pivot, b_node* pivot_parent );
+void right_rotate( b_node* pivot );
+void left_rotate( b_node* pivot );
 
 // rotation_cases.c
 void LL_rotate( node_family f );

@@ -5,14 +5,14 @@
 
 void dump_family( node_family f );
 
-node_family identify_family( b_node* node, b_node* root, Data_node* rbnode_list )
+node_family identify_family( b_node* node, Data_node* rbnode_list )
 {
   node_family fam;
   b_node *self = node,
-         *parent           = locate_parent( self, root ),
-         *grandparent      = locate_parent( parent, root ),
-         *greatgrandparent = locate_parent( grandparent, root ),
-         *uncle   = locate_sibling( parent, root );
+         *parent           = locate_parent( self ),
+         *grandparent      = locate_parent( parent ),
+         *greatgrandparent = locate_parent( grandparent ),
+         *uncle   = locate_sibling( parent );
 
   fam.self             = lookup_rbnode( self,        rbnode_list );
   fam.parent           = lookup_rbnode( parent,      rbnode_list );

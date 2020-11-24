@@ -3,12 +3,12 @@
 
 #include "binary_tree.h"
 
-b_node* locate_sibling( b_node* target, b_node* root )
+b_node* locate_sibling( b_node* target )
 {
-  if( !root || !target )
+  if( !target )
     return NULL;
 
-  b_node* parent = locate_parent( target, root );
+  b_node* parent = locate_parent( target );
   if ( !parent )
     return NULL;
 

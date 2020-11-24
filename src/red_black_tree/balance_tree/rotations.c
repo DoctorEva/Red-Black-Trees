@@ -5,11 +5,12 @@
 
 void reattach_pivot( b_node* pivot, b_node* pivot_parent, b_node* pivot_child );
 
-void right_rotate( b_node* pivot, b_node* pivot_parent )
+void right_rotate( b_node* pivot )
 {
   // Grab binary nodes
-  b_node *p       = pivot;
-  b_node *p_child = pivot->left;
+  b_node *p        = pivot;
+  b_node *p_child  = pivot->left;
+  b_node *p_parent = locate_parent( p );
 
   if ( !p_child || !p )
   {
@@ -27,14 +28,17 @@ void right_rotate( b_node* pivot, b_node* pivot_parent )
   //p->right = pr;
 
   // Reattach pivot parent.
-  reattach_pivot( p, pivot_parent, p_child );
+  reattach_pivot( p, p_parent, p_child );
+  p->parent = p_child;
+  p_child->parent = p_parent;
 }
 
-void left_rotate( b_node* pivot, b_node* pivot_parent )
+void left_rotate( b_node* pivot )
 {
   // Grab binary nodes
-  b_node *p       = pivot;
-  b_node *p_child = pivot->right;
+  b_node *p        = pivot;
+  b_node *p_child  = pivot->right;
+  b_node *p_parent = locate_parent( p );
 
   if ( !p_child || !p )
   {
@@ -51,8 +55,10 @@ void left_rotate( b_node* pivot, b_node* pivot_parent )
   // p->left = pl;
   p->right = pc_l;
 
-  // Reattach pivot parent.
-  reattach_pivot( p, pivot_parent, p_child );
+  // Reattach pivot parent to pivot child.
+  reattach_pivot( p, p_parent, p_child );
+  p->parent = p_child;
+  p_child->parent = p_parent;
 }
 
 //____________________________________
@@ -60,7 +66,7 @@ void left_rotate( b_node* pivot, b_node* pivot_parent )
 void reattach_pivot( b_node* pivot, b_node* pivot_parent, b_node* pivot_child )
 {
   if ( !pivot_parent ) return;
-  side s = getSide( pivot, pivot_parent );
+  side s = getSide( pivot );
   if ( s == LEFT ) pivot_parent->left  = pivot_child;
   else             pivot_parent->right = pivot_child;
 }

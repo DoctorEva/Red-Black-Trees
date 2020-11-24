@@ -12,9 +12,8 @@ node_family family_swap_parent_and_X( node_family f );
 void LL_rotate( node_family f )
 {
   b_node* gp = f.GP->node;
-  b_node* ggp = (f.GGP) ? f.GGP->node : NULL;
   // right rotate the grandparent
-  right_rotate( gp, ggp );
+  right_rotate( gp );
 
   // swap the colors of grandpa and parent.
   rbnode_colorSwap( f.GP, f.parent );
@@ -23,8 +22,7 @@ void LL_rotate( node_family f )
 void LR_rotate( node_family f )
 {
   b_node* p = f.parent->node;
-  b_node* gp = (f.GP) ? f.GP->node : NULL;
-  left_rotate( p, gp );
+  left_rotate( p );
 
   f = family_swap_parent_and_X( f );
   LL_rotate( f );
@@ -33,8 +31,7 @@ void LR_rotate( node_family f )
 void RR_rotate( node_family f )
 {
   b_node* gp = f.GP->node;
-  b_node* ggp = (f.GGP) ? f.GGP->node : NULL;
-  left_rotate( gp, ggp );
+  left_rotate( gp );
 
   rbnode_colorSwap( f.GP, f.parent );
 }
@@ -42,8 +39,7 @@ void RR_rotate( node_family f )
 void RL_rotate( node_family f )
 {
   b_node* p = f.parent->node;
-  b_node* gp = (f.GP) ? f.GP->node : NULL;
-  right_rotate( p, gp );
+  right_rotate( p );
 
   f = family_swap_parent_and_X( f );
   RR_rotate( f );

@@ -24,3 +24,6 @@ locate_sibling.o: locate_sibling.c
 
 tree_trace.o: tree_trace.c
 	gcc -c tree_trace.c
+
+locate_root.o: locate_root.c
+	gcc -c locate_root.c

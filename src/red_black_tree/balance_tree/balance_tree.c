@@ -3,22 +3,23 @@
 
 #include "balance_tree.h"
 
-side getSide( b_node* node, b_node* parent )
+side getSide( b_node* node )
 {
-  if      ( parent->left == node ) return LEFT;
-  else if ( parent->right == node ) return RIGHT;
-  else
+  b_node* parent = locate_parent( node );
+  if ( !parent )
   {
     puts( "balance_tree.c: Error, not a child of parent." );
     exit(1);
   }
+  if      ( parent->left == node ) return LEFT;
+  else if ( parent->right == node ) return RIGHT;
 }
 
 rb_node* check_root( node_family f, rb_node* rbroot );
 
 rb_node* balance_tree( b_node* node, rb_node* rbroot, Data_node* rbnode_list )
 {
-  node_family f = identify_family( node, rbroot->node, rbnode_list );
+  node_family f = identify_family( node, rbnode_list );
 
   // Case 1: Black if x is root.
   if ( !f.parent )
@@ -49,8 +50,8 @@ rb_node* balance_tree( b_node* node, rb_node* rbroot, Data_node* rbnode_list )
   }
 
   // Uncle is black. Parent is red ( Note, this implies there MUST be a grandparent )
-  side parent_side = getSide( f.parent->node, f.grandparent->node );
-  side self_side   = getSide( f.self->node, f.parent->node );
+  side parent_side = getSide( f.parent->node );
+  side self_side   = getSide( f.self->node );
    if      ( parent_side == LEFT && self_side == LEFT )   { LL_rotate(f); }
    else if ( parent_side == LEFT && self_side == RIGHT )  { LR_rotate(f); }
    else if ( parent_side == RIGHT && self_side == RIGHT ) { RR_rotate(f); }
@@ -64,7 +65,10 @@ rb_node* balance_tree( b_node* node, rb_node* rbroot, Data_node* rbnode_list )
 
 rb_node* check_root( node_family f, rb_node* rbroot )
 {
-  b_node* old_root = rbroot->node;
+  b_node* new_root = locate_root( rbroot->node );
+  if( new_root == rbroot->node )
+    return rbroot;
+
   rb_node* candidates[5];
   candidates[0] = f.self;
   candidates[1] = f.parent;
@@ -77,11 +81,10 @@ rb_node* check_root( node_family f, rb_node* rbroot )
   {
     if ( !candidates[i] ) continue;
     b_node* x = candidates[i]->node;
-    if ( x->left == old_root || x->right == old_root )
+    if ( x == new_root )
     {
-      //printf( "<ROOT changed to %p %d>\n", candidates[i], x->value );
+      printf( "<ROOT changed to %p %d>\n", candidates[i], x->value );
       return candidates[i];
     }
   }
-  return rbroot;
 }
