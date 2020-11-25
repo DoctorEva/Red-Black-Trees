@@ -28,10 +28,11 @@ rb_node* _insert_rbnode( int value, void* data, rb_node* root, b_node** ret_loc 
   // Rebalance the tree
   rb_root = balance_tree( rbn->node, rb_root );
 
-  // always return the rb_node that stores the root b_node
+  // If ret_loc was provided, give it the location of the new b_node
   if ( ret_loc )
     *ret_loc = rbn->node;
 
+  // always return the rb_node that stores the root b_node
   return rb_root;
 }
 
