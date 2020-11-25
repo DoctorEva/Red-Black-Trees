@@ -3,22 +3,11 @@
 
 #include "balance_tree.h"
 
-side getSide( b_node* node, b_node* parent )
-{
-  if      ( parent->left == node ) return LEFT;
-  else if ( parent->right == node ) return RIGHT;
-  else
-  {
-    puts( "balance_tree.c: Error, not a child of parent." );
-    exit(1);
-  }
-}
-
 rb_node* check_root( node_family f, rb_node* rbroot );
 
-rb_node* balance_tree( b_node* node, rb_node* rbroot, Data_node* rbnode_list )
+rb_node* balance_tree( b_node* node, rb_node* rbroot )
 {
-  node_family f = identify_family( node, rbroot->node, rbnode_list );
+  node_family f = identify_family( node, rbroot->node );
 
   // Case 1: Black if x is root.
   if ( !f.parent )
@@ -45,7 +34,7 @@ rb_node* balance_tree( b_node* node, rb_node* rbroot, Data_node* rbnode_list )
     f.parent->color = BLACK;
     f.uncle->color = BLACK;
     f.grandparent->color = RED;
-    return balance_tree( f.grandparent->node, rbroot, rbnode_list );
+    return balance_tree( f.grandparent->node, rbroot );
   }
 
   // Uncle is black. Parent is red ( Note, this implies there MUST be a grandparent )

@@ -14,10 +14,10 @@ typedef struct _node_family
   rb_node* uncle;
 } node_family;
 
-rb_node* balance_tree( b_node* node, rb_node* rbroot, Data_node* rbnode_list );
+rb_node* balance_tree( b_node* node, rb_node* rbroot );
 
 // Balance tree helpers.
-node_family identify_family( b_node* node, b_node* root, Data_node* rbnode_list );
+node_family identify_family( b_node* node, b_node* root );
 side getSide( b_node* node, b_node* parent );
 
 // rotations.c

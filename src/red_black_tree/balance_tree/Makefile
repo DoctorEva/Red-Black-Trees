@@ -2,7 +2,8 @@ all: \
 	balance_tree.o \
 	identify_family.o \
 	rotation_cases.o \
-	rotations.o
+	rotations.o \
+	getSide.o
 
 balance_tree.o: balance_tree.c
 	gcc -c balance_tree.c
@@ -15,3 +16,6 @@ rotation_cases.o: rotation_cases.c
 
 rotations.o: rotations.c
 	gcc -c rotations.c
+
+getSide.o: getSide.c
+	gcc -c getSide.c

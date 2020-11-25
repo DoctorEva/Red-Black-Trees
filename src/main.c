@@ -21,8 +21,8 @@ int main( int argc, char** argv )
   for(int x = 0; x < 100; x++)
   {
     int r = random_int( -1000, 1000 );
-    b_root  = insert_bnode( r, b_root );
-    rb_root = insert_rbnode( r, rb_root );
+    b_root  = insert_bnode( r, NULL, b_root );
+    rb_root = insert_rbnode( r, NULL, rb_root );
   }
 
   puts( "\n=== BINARY TREE DUMP ===");
