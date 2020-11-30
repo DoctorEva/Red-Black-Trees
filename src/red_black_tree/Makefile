@@ -1,5 +1,5 @@
 all: \
-	insert_rbnode.o 
+	insert_rbnode.o
 
-insert_rbnode.o: insert_rbnode.c
-	gcc -c insert_rbnode.c
+%.o: %.c
+	gcc -c $(subst .o,.c, $@)

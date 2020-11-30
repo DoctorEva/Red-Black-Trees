@@ -1,6 +1,6 @@
 
 main: src_make
-	find ./src/ -name '*.o' -exec cp '{}' . ';'; \
+	find ./src/ -name '*.o' -exec cp -uv '{}' . ';'; \
 	gcc src/main.c *.o -o Final.out
 
 src_make:
