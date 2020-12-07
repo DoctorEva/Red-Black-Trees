@@ -18,24 +18,25 @@ int main( int argc, char** argv )
   puts("MAIN > To demonstrate our binary tree, we are going to repeatedly insert randomly generated numbers into two trees.");
   puts("MAIN > One of these trees will be balanced as a red-black tree. The other will stay a simple binary tree.");
 
-  for(int x = 0; x < 100; x++)
+  for(int x = 0, max = 100000; x < max; x++)
   {
     int r = random_int( -1000, 1000 );
     b_root  = insert_bnode( r, NULL, b_root );
     rb_root = insert_rbnode( r, NULL, rb_root );
+    printf( "progress: %4d / %4d\r", x+1, max );
   }
 
   puts( "\n=== BINARY TREE DUMP ===");
-  dump_tree( b_root );
+  //dump_tree( b_root );
 
   puts( "\n=== RED BLACK TREE DUMP ===");
-  dump_tree( rb_root->node );
+  //dump_tree( rb_root->node );
 
   puts( "\nTree trace on binary tree" );
-  tree_trace( b_root );
+  //tree_trace( b_root );
 
   puts( "\nTree trace on red black tree" );
-  tree_trace( rb_root->node );
+  //tree_trace( rb_root->node );
 
   return 0;
 }
