@@ -3,16 +3,18 @@
 
 #include "balance_tree.h"
 
-rb_node* check_root( node_family f, rb_node* rbroot );
+int _db = 0; // debug prints.
+
+rb_node* check_root( rb_node* rbroot );
 
 rb_node* balance_tree( b_node* node, rb_node* rbroot )
 {
-  node_family f = identify_family( node, rbroot->node );
+  node_family f = identify_family( node );
 
   // Case 1: Black if x is root.
   if ( !f.parent )
   {
-    //puts( "case 1: root colored to black." );
+    if( _db) puts( "case 1: root colored to black." );
     // recolour to black.
     f.self->color = BLACK;
     return rbroot;
@@ -24,13 +26,13 @@ rb_node* balance_tree( b_node* node, rb_node* rbroot )
   paint uncle_color = ( f.uncle ) ? f.uncle->color : BLACK;
   if ( parent_color == BLACK  )
   {
-    //puts( "OK: already balanced." );
+    if( _db) puts( "OK: already balanced." );
     return rbroot;
   }
 
   if ( uncle_color == RED ) // Grandparent MUST be black.
   {
-    //puts( "case 2a: uncle is red, grandpa is black. Recolor and Recurse with grandpa." );
+    if( _db) puts( "case 2a: uncle is red, grandpa is black. Recolor and Recurse with grandpa." );
     f.parent->color = BLACK;
     f.uncle->color = BLACK;
     f.grandparent->color = RED;
@@ -38,39 +40,20 @@ rb_node* balance_tree( b_node* node, rb_node* rbroot )
   }
 
   // Uncle is black. Parent is red ( Note, this implies there MUST be a grandparent )
-  side parent_side = getSide( f.parent->node, f.grandparent->node );
-  side self_side   = getSide( f.self->node, f.parent->node );
-   if      ( parent_side == LEFT && self_side == LEFT )   { LL_rotate(f); }
-   else if ( parent_side == LEFT && self_side == RIGHT )  { LR_rotate(f); }
-   else if ( parent_side == RIGHT && self_side == RIGHT ) { RR_rotate(f); }
-   else if ( parent_side == RIGHT && self_side == LEFT )  { RL_rotate(f); }
+  make_rotations( f );
 
-   // After rotation, make sure to return the new root node if there is one.
-   return check_root( f, rbroot );
+  // After rotation, make sure to return the new root node if there is one.
+  return check_root( rbroot );
 }
 
 //____________________________________
 
-rb_node* check_root( node_family f, rb_node* rbroot )
+rb_node* check_root( rb_node* rbroot )
 {
-  b_node* old_root = rbroot->node;
-  rb_node* candidates[5];
-  candidates[0] = f.self;
-  candidates[1] = f.parent;
-  candidates[2] = f.grandparent;
-  candidates[3] = f.greatgrandparent;
-  candidates[4] = f.uncle;
+  b_node* root = locate_parent( rbroot->node );
 
-  int i;
-  for ( i = 0; i<5; i++ )
-  {
-    if ( !candidates[i] ) continue;
-    b_node* x = candidates[i]->node;
-    if ( x->left == old_root || x->right == old_root )
-    {
-      //printf( "<ROOT changed to %p %d>\n", candidates[i], x->value );
-      return candidates[i];
-    }
-  }
+  if ( root )
+    return (rb_node*) root->data;
+
   return rbroot;
 }

@@ -23,9 +23,9 @@ rb_node* _insert_rbnode( int value, void* data, rb_node* root, b_node** ret_loc 
   // Create a new rb_node
   rb_node* rbn = initialize_rbnode( new_bnode );
 
-  rb_node* rb_root = ( root ) ? root : rbn;
-
   // Rebalance the tree
+  // If we were not provided a root, assume the new node is the root.
+  rb_node* rb_root = ( root ) ? root : rbn;
   rb_root = balance_tree( rbn->node, rb_root );
 
   // If ret_loc was provided, give it the location of the new b_node
