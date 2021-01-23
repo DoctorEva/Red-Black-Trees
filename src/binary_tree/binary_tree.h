@@ -1,22 +1,24 @@
 #ifndef BIN_H
 #define BIN_H
+#include <stddef.h>
 
 typedef struct _binaryTreeNode
 {
-  int value;
-  void* data;
-
+  int id;
+  size_t size;
   struct _binaryTreeNode* left;
   struct _binaryTreeNode* right;
   struct _binaryTreeNode* parent;
 
 } b_node;
 
-b_node* insert_bnode( int value, void* data, b_node* root );
-b_node* _insert_bnode( int value, void* data, b_node* root, b_node** ret_loc );
+
+b_node* bn_alloc( int id, void* src, size_t size );
+void*   bn_DataPtr( b_node* bn );
+
+b_node* bn_insert( b_node* new, b_node* root );
 
 // traversals.c
-// NOTE: these are only the depth first traversals
 void print_inorder( b_node* root );
 void print_preorder( b_node* root );
 void print_postorder( b_node* root );

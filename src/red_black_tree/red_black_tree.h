@@ -7,13 +7,13 @@ typedef enum _paint{ RED, BLACK } paint;
 
 typedef struct _redBlackTreeNode
 {
-  b_node* node;
-  void* data;
   paint color;
-
 } rb_node;
 
-rb_node* insert_rbnode( int value, void* data, rb_node* root);
-rb_node* _insert_rbnode( int value, void* data, rb_node* root, b_node** ret_loc );
+b_node*  rbn_alloc( int id, void* src, size_t size );
+void*    rbn_DataPtr( b_node* bn );
+rb_node* rbn( b_node* rbn );
+
+b_node* rbn_insert( b_node* new, b_node* root );
 
 #endif

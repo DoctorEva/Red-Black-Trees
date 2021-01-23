@@ -6,13 +6,13 @@
 #define GP  grandparent
 #define GGP greatgrandparent
 
-void rbnode_colorSwap( rb_node* a, rb_node* b );
+void rbnode_colorSwap( b_node* a, b_node* b );
 node_family family_swap_parent_and_X( node_family f );
 
 void LL_rotate( node_family f )
 {
-  b_node* gp = f.GP->node;
-  b_node* ggp = (f.GGP) ? f.GGP->node : NULL;
+  b_node* gp = f.GP;
+  b_node* ggp = f.GGP;
   // right rotate the grandparent
   right_rotate( gp, ggp );
 
@@ -22,8 +22,8 @@ void LL_rotate( node_family f )
 
 void LR_rotate( node_family f )
 {
-  b_node* p = f.parent->node;
-  b_node* gp = (f.GP) ? f.GP->node : NULL;
+  b_node* p = f.parent;
+  b_node* gp = f.GP;
   left_rotate( p, gp );
 
   f = family_swap_parent_and_X( f );
@@ -32,8 +32,8 @@ void LR_rotate( node_family f )
 
 void RR_rotate( node_family f )
 {
-  b_node* gp = f.GP->node;
-  b_node* ggp = (f.GGP) ? f.GGP->node : NULL;
+  b_node* gp = f.GP;
+  b_node* ggp = f.GGP;
   left_rotate( gp, ggp );
 
   rbnode_colorSwap( f.GP, f.parent );
@@ -41,8 +41,8 @@ void RR_rotate( node_family f )
 
 void RL_rotate( node_family f )
 {
-  b_node* p = f.parent->node;
-  b_node* gp = (f.GP) ? f.GP->node : NULL;
+  b_node* p = f.parent;
+  b_node* gp = f.GP;
   right_rotate( p, gp );
 
   f = family_swap_parent_and_X( f );
@@ -51,7 +51,7 @@ void RL_rotate( node_family f )
 
 //___________________________________________________________
 
-void rbnode_colorSwap( rb_node* a, rb_node* b )
+void rbnode_colorSwap( b_node* a, b_node* b )
 {
   if ( !a || !b )
   {
@@ -59,14 +59,16 @@ void rbnode_colorSwap( rb_node* a, rb_node* b )
     exit(1);
   }
 
-  paint temp = a->color;
-  a->color = b->color;
-  b->color = temp;
+  rb_node* A = rbn(a);
+  rb_node* B = rbn(b);
+  paint temp = A->color;
+  A->color = B->color;
+  B->color = temp;
 }
 
 node_family family_swap_parent_and_X( node_family f )
 {
-  rb_node* temp = f.self;
+  b_node* temp = f.self;
   f.self = f.parent;
   f.parent = temp;
   return f;

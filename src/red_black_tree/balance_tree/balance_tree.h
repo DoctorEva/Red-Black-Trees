@@ -7,14 +7,14 @@ typedef enum _side{ LEFT, RIGHT } side;
 
 typedef struct _node_family
 {
-  rb_node* self;
-  rb_node* parent;
-  rb_node* grandparent;
-  rb_node* greatgrandparent;
-  rb_node* uncle;
+  b_node* self;
+  b_node* parent;
+  b_node* grandparent;
+  b_node* greatgrandparent;
+  b_node* uncle;
 } node_family;
 
-rb_node* balance_tree( b_node* node, rb_node* rbroot );
+b_node* balance_tree( b_node* new, b_node* root );
 
 // Balance tree helpers.
 node_family identify_family( b_node* node );

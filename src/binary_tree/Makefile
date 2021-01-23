@@ -1,5 +1,6 @@
 all: \
-	insert_bnode.o \
+	bn_alloc.o \
+	bn_insert.o \
 	tree_depth.o \
 	traversals.o \
 	locate_parent.o \
