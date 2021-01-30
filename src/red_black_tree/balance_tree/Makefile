@@ -5,6 +5,7 @@ all: \
 	rotations.o \
 	make_rotations.o \
 	getSide.o
+	ld -r *.o -o __BalanceTree.o
 
 %.o: %.c
 	gcc -c $(subst .o,.c, $@)
